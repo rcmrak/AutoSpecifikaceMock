@@ -1,0 +1,35 @@
+
+
+
+
+CREATE COMPUTE MODULE getSpecifikace_createResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		SET OutputRoot.XMLNSC.Auto.kod = InputLocalEnvironment.REST.Input.Parameters.kod;
+
+		IF OutputRoot.XMLNSC.Auto.kod = 1 THEN
+			SET OutputRoot.XMLNSC.Auto.motor = 'tsi';
+			SET OutputRoot.XMLNSC.Auto.palivo = 'benzin';
+			SET OutputRoot.XMLNSC.Auto.prevodovka = 'manual';
+
+		ELSEIF OutputRoot.XMLNSC.Auto.kod = 2 THEN
+			SET OutputRoot.XMLNSC.Auto.motor = 'tdi';
+			SET OutputRoot.XMLNSC.Auto.palivo = 'nafta';
+			SET OutputRoot.XMLNSC.Auto.prevodovka = 'automat';
+
+		ELSEIF OutputRoot.XMLNSC.Auto.kod = 3 THEN
+			SET OutputRoot.XMLNSC.Auto.motor = 'AC';
+			SET OutputRoot.XMLNSC.Auto.palivo = 'elektrika';
+			SET OutputRoot.XMLNSC.Auto.prevodovka = 'automat';
+
+		ELSE
+			SET OutputRoot.XMLNSC.Auto.motor = '';
+			SET OutputRoot.XMLNSC.Auto.palivo = '';
+			SET OutputRoot.XMLNSC.Auto.prevodovka = '';
+
+		END IF;
+		RETURN TRUE;
+
+	END;
+END MODULE;
